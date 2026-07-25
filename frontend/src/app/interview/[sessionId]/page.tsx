@@ -77,30 +77,30 @@ export default function InterviewPage() {
 
   if (!sessionState || !socket) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center text-zinc-400">
-        {error ? <p className="text-red-400">{error}</p> : <p>Loading session…</p>}
+      <div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">
+        {error ? <p className="text-destructive">{error}</p> : <p>Loading session…</p>}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Top bar */}
-      <header className="h-12 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between px-4 shrink-0">
-        <span className="text-sm font-semibold text-white">SkillForge</span>
+      <header className="h-12 bg-surface border-b border-border flex items-center justify-between px-4 shrink-0">
+        <span className="text-sm font-semibold text-foreground">SkillForge</span>
         <div className="flex items-center gap-4">
-          <span className="text-sm font-mono text-zinc-400">{fmtElapsed(elapsed)}</span>
+          <span className="text-sm font-mono text-muted-foreground tabular-nums">{fmtElapsed(elapsed)}</span>
           <button
             onClick={handleRun}
             disabled={isRunning || isEnding}
-            className="px-4 py-1.5 text-sm font-medium bg-zinc-700 hover:bg-zinc-600 disabled:opacity-40 text-white rounded transition-colors"
+            className="cursor-pointer px-4 py-1.5 text-sm font-medium bg-muted hover:bg-surface-hover disabled:opacity-40 disabled:cursor-not-allowed text-foreground border border-border hover:border-border-hover rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           >
             {isRunning ? "Running…" : "Run"}
           </button>
           <button
             onClick={handleEnd}
             disabled={isEnding || isRunning}
-            className="px-4 py-1.5 text-sm font-medium bg-red-700 hover:bg-red-600 disabled:opacity-40 text-white rounded transition-colors"
+            className="cursor-pointer px-4 py-1.5 text-sm font-medium bg-destructive hover:bg-destructive-hover disabled:opacity-40 disabled:cursor-not-allowed text-on-primary rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           >
             {isEnding ? "Submitting…" : "End Interview"}
           </button>
@@ -108,26 +108,26 @@ export default function InterviewPage() {
       </header>
 
       {error && (
-        <div className="bg-red-950 border-b border-red-800 px-4 py-2 text-sm text-red-300">
+        <div className="bg-destructive/10 border-b border-destructive/30 px-4 py-2 text-sm text-destructive">
           {error}
         </div>
       )}
 
       <div className="flex flex-1 overflow-hidden">
         {/* Left: problem + run output */}
-        <div className="w-80 shrink-0 border-r border-zinc-800 flex flex-col overflow-y-auto">
+        <div className="w-80 shrink-0 border-r border-border flex flex-col overflow-y-auto">
           {/* Problem statement */}
-          <div className="border-b border-zinc-800">
+          <div className="border-b border-border">
             <button
               onClick={() => setStatementOpen((o) => !o)}
-              className="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-zinc-400 uppercase tracking-wide hover:text-white transition-colors"
+              className="cursor-pointer w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide hover:text-foreground transition-colors duration-200"
             >
               <span>Problem</span>
               <span>{statementOpen ? "−" : "+"}</span>
             </button>
             {statementOpen && (
               <div className="px-4 pb-4">
-                <pre className="text-xs text-zinc-300 font-mono whitespace-pre-wrap leading-relaxed">
+                <pre className="text-xs text-muted-foreground font-mono whitespace-pre-wrap leading-relaxed">
                   {sessionState.statement}
                 </pre>
               </div>
@@ -136,7 +136,7 @@ export default function InterviewPage() {
 
           {/* Run output */}
           <div className="flex-1">
-            <div className="px-4 py-2 text-xs font-semibold text-zinc-400 uppercase tracking-wide border-b border-zinc-800">
+            <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide border-b border-border">
               Test Results
             </div>
             <RunPanel result={runResult} isRunning={isRunning} />

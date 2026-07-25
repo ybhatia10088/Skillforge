@@ -18,15 +18,18 @@ export default function ReportPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
-          <p className="text-red-400">{error}</p>
+          <p className="text-destructive">{error}</p>
           {error.includes("not been evaluated") && (
-            <p className="text-zinc-500 text-sm">
+            <p className="text-muted-foreground text-sm">
               The session may still be processing. Refresh in a moment.
             </p>
           )}
-          <Link href="/" className="text-blue-400 hover:underline text-sm">
+          <Link
+            href="/"
+            className="text-accent hover:text-accent-hover hover:underline text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+          >
             Start a new interview
           </Link>
         </div>
@@ -36,27 +39,27 @@ export default function ReportPage() {
 
   if (!report) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center text-zinc-400 animate-pulse">
+      <div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground animate-pulse">
         Generating evaluation report…
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-zinc-900 border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
-        <span className="text-white font-semibold">SkillForge</span>
+      <header className="bg-surface border-b border-border px-6 py-4 flex items-center justify-between">
+        <span className="text-foreground font-semibold">SkillForge</span>
         <Link
           href="/"
-          className="text-sm text-zinc-400 hover:text-white transition-colors"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
         >
           ← New interview
         </Link>
       </header>
 
       <div className="max-w-4xl mx-auto px-6 py-10 space-y-12">
-        <h1 className="text-2xl font-bold text-white">Interview Report</h1>
+        <h1 className="text-2xl font-bold text-foreground tracking-tight">Interview Report</h1>
 
         {/* Scores + evidence */}
         <ReportCharts report={report} />
@@ -64,8 +67,8 @@ export default function ReportPage() {
         {/* Final code */}
         {report.final_code && (
           <section>
-            <h2 className="text-lg font-semibold text-white mb-3">Final Code</h2>
-            <pre className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-sm font-mono text-zinc-300 overflow-auto whitespace-pre-wrap">
+            <h2 className="text-lg font-semibold text-foreground mb-3">Final Code</h2>
+            <pre className="bg-surface border border-border rounded-lg p-4 text-sm font-mono text-muted-foreground overflow-auto whitespace-pre-wrap shadow-sm">
               {report.final_code}
             </pre>
           </section>
@@ -74,8 +77,8 @@ export default function ReportPage() {
         {/* Timeline */}
         {report.timeline?.length > 0 && (
           <section>
-            <h2 className="text-lg font-semibold text-white mb-3">Session Timeline</h2>
-            <div className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+            <h2 className="text-lg font-semibold text-foreground mb-3">Session Timeline</h2>
+            <div className="bg-surface border border-border rounded-lg overflow-hidden shadow-sm">
               <Timeline lines={report.timeline} />
             </div>
           </section>

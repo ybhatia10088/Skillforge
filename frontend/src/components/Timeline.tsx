@@ -5,7 +5,7 @@ interface Props {
 }
 
 export default function Timeline({ lines }: Props) {
-  if (!lines.length) return <p className="text-zinc-500 text-sm p-4">No events yet.</p>;
+  if (!lines.length) return <p className="text-muted-foreground text-sm p-4">No events yet.</p>;
 
   return (
     <div className="p-4 space-y-1 font-mono text-xs">
@@ -15,11 +15,11 @@ export default function Timeline({ lines }: Props) {
         const isIdle = line.includes("interval") || line.includes("pause") || line.includes("inactivity");
         const isReset = line.includes("reset");
 
-        let color = "text-zinc-400";
-        if (isPass) color = "text-green-400";
-        else if (isRun && !isPass) color = "text-amber-400";
-        else if (isIdle) color = "text-blue-400";
-        else if (isReset) color = "text-orange-400";
+        let color = "text-muted-foreground";
+        if (isPass) color = "text-success";
+        else if (isRun && !isPass) color = "text-warning";
+        else if (isIdle) color = "text-accent";
+        else if (isReset) color = "text-secondary";
 
         return (
           <div key={i} className="flex gap-3">

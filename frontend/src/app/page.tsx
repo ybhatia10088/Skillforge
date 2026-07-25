@@ -22,21 +22,39 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 flex items-center justify-center">
-      <div className="max-w-lg w-full px-6 text-center space-y-8">
+    <main className="relative min-h-screen bg-background flex items-center justify-center overflow-hidden">
+      {/* Ambient brand glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 50% at 50% 0%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 70%), radial-gradient(40% 40% at 85% 90%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 70%)",
+        }}
+      />
+
+      <div className="relative max-w-lg w-full px-6 text-center space-y-8">
         <div className="space-y-3">
-          <h1 className="text-4xl font-bold text-white tracking-tight">SkillForge</h1>
-          <p className="text-zinc-400 text-lg">
-            AI-powered interview simulator that evaluates <em>how</em> you solve problems,
+          <h1
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent"
+            style={{
+              backgroundImage: "linear-gradient(135deg, var(--color-foreground), var(--color-secondary))",
+              textShadow: "0 0 24px color-mix(in srgb, var(--color-primary) 35%, transparent)",
+            }}
+          >
+            SkillForge
+          </h1>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            AI-powered interview simulator that evaluates <em className="text-foreground not-italic font-semibold">how</em> you solve problems,
             not just whether your final code passes.
           </p>
         </div>
 
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 text-left space-y-4">
-          <h2 className="text-sm font-semibold text-zinc-300 uppercase tracking-wide">
+        <div className="bg-surface border border-border rounded-xl p-6 text-left space-y-4 shadow-md">
+          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
             What gets evaluated
           </h2>
-          <ul className="space-y-2 text-sm text-zinc-400">
+          <ul className="space-y-2 text-sm text-muted-foreground">
             {[
               "Problem decomposition and first attempt quality",
               "Debugging behaviour across multiple runs",
@@ -45,7 +63,7 @@ export default function Home() {
               "Final solution correctness",
             ].map((item) => (
               <li key={item} className="flex gap-2">
-                <span className="text-blue-400 shrink-0">→</span>
+                <span className="text-accent shrink-0">→</span>
                 {item}
               </li>
             ))}
@@ -56,12 +74,12 @@ export default function Home() {
           <button
             onClick={start}
             disabled={loading}
-            className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors text-lg"
+            className="cursor-pointer w-full py-3 px-6 bg-accent hover:bg-accent-hover disabled:opacity-50 disabled:cursor-not-allowed text-on-primary font-semibold rounded-lg shadow-md transition-all duration-200 hover:-translate-y-0.5 text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {loading ? "Starting…" : "Start Mock Interview"}
           </button>
-          {error && <p className="text-red-400 text-sm">{error}</p>}
-          <p className="text-xs text-zinc-600">
+          {error && <p className="text-destructive text-sm">{error}</p>}
+          <p className="text-xs text-muted-foreground/70">
             Python · fixed-window rate limiter problem · AI-scored report at the end
           </p>
         </div>

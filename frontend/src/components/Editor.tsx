@@ -81,11 +81,11 @@ const Editor = forwardRef<EditorHandle, Props>(function Editor({ starterCode, in
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between px-3 py-1.5 bg-zinc-800 border-b border-zinc-700">
-        <span className="text-xs text-zinc-400 font-mono">Python 3</span>
+      <div className="flex items-center justify-between px-3 py-1.5 bg-surface border-b border-border">
+        <span className="text-xs text-muted-foreground font-mono">Python 3</span>
         <button
           onClick={handleReset}
-          className="text-xs text-zinc-400 hover:text-white px-2 py-0.5 rounded border border-zinc-600 hover:border-zinc-400 transition-colors"
+          className="cursor-pointer text-xs text-muted-foreground hover:text-foreground px-2 py-0.5 rounded-md border border-border hover:border-border-hover transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-surface"
         >
           Reset to starter
         </button>

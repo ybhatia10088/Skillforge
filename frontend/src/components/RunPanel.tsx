@@ -10,13 +10,13 @@ interface Props {
 export default function RunPanel({ result, isRunning }: Props) {
   if (isRunning) {
     return (
-      <div className="p-4 text-sm text-zinc-400 animate-pulse">Running tests…</div>
+      <div className="p-4 text-sm text-muted-foreground animate-pulse">Running tests…</div>
     );
   }
   if (!result) {
     return (
-      <div className="p-4 text-sm text-zinc-500">
-        Click <strong className="text-zinc-300">Run</strong> to execute your code against the hidden tests.
+      <div className="p-4 text-sm text-muted-foreground">
+        Click <strong className="text-foreground">Run</strong> to execute your code against the hidden tests.
       </div>
     );
   }
@@ -32,8 +32,8 @@ export default function RunPanel({ result, isRunning }: Props) {
     const output = result.compile_output || result.stderr || "No output";
     return (
       <div className="p-4 space-y-2">
-        <p className="text-red-400 text-sm font-semibold">{statusLabel[result.status] ?? result.status}</p>
-        <pre className="text-xs bg-zinc-900 p-3 rounded overflow-auto whitespace-pre-wrap text-zinc-300">
+        <p className="text-destructive text-sm font-semibold">{statusLabel[result.status] ?? result.status}</p>
+        <pre className="text-xs bg-background border border-border p-3 rounded-lg overflow-auto whitespace-pre-wrap text-muted-foreground">
           {output}
         </pre>
       </div>
@@ -44,26 +44,26 @@ export default function RunPanel({ result, isRunning }: Props) {
     <div className="p-4 space-y-3">
       <div className="flex items-center gap-3">
         <span
-          className={`text-sm font-semibold ${result.all_passed ? "text-green-400" : "text-amber-400"}`}
+          className={`text-sm font-semibold ${result.all_passed ? "text-success" : "text-warning"}`}
         >
           {result.tests_passed}/{result.tests_total} tests passed
         </span>
         {result.all_passed && (
-          <span className="text-xs bg-green-900/40 text-green-300 px-2 py-0.5 rounded">All passing</span>
+          <span className="text-xs bg-success/15 text-success px-2 py-0.5 rounded-md">All passing</span>
         )}
       </div>
       <div className="space-y-1">
         {result.tests.map((t) => (
           <div key={t.name} className="flex items-center gap-2 text-xs font-mono">
-            <span className={t.passed ? "text-green-400" : "text-red-400"}>
+            <span className={t.passed ? "text-success" : "text-destructive"}>
               {t.passed ? "✓" : "✗"}
             </span>
-            <span className="text-zinc-300">{t.name.replace(/_/g, " ")}</span>
+            <span className="text-muted-foreground">{t.name.replace(/_/g, " ")}</span>
           </div>
         ))}
       </div>
       {result.stderr && (
-        <pre className="text-xs bg-zinc-900 p-2 rounded text-zinc-400 whitespace-pre-wrap overflow-auto">
+        <pre className="text-xs bg-background border border-border p-2 rounded-lg text-muted-foreground whitespace-pre-wrap overflow-auto">
           {result.stderr}
         </pre>
       )}
